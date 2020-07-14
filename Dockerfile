@@ -2,6 +2,10 @@ FROM centos:7.6.1810
 USER root
 WORKDIR /home
 
+# install basic services
+
+RUN yum install -y sudo
+
 # install DOCKER
 
 RUN yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
@@ -18,10 +22,6 @@ gpgcheck=1\n\
 gpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/azure-cli.repo'
 RUN yum install -y azure-cli
 RUN az acr helm install-cli --yes
-
-# install HELM
-
-RUN curl -L https://git.io/get_helm.sh | bash
 
 # add jenkins user and make it a power user
 
