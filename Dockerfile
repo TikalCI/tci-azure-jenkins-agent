@@ -42,6 +42,10 @@ ENV JAVA_HOME /etc/alternatives/jre
 RUN rpm --import http://opensource.wandisco.com/RPM-GPG-KEY-WANdisco
 RUN yum install -y git
 
+# install kubectl
+
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+
 # switch to jenkins user
 
 USER jenkins
