@@ -30,6 +30,18 @@ RUN useradd -c "Jenkins user" -d /home/jenkins -u 1000 -g jenkins -m jenkins
 RUN sudo usermod -aG docker jenkins
 RUN echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
+# install JDK
+
+RUN yum install -y \
+       java-1.8.0-openjdk \
+       java-1.8.0-openjdk-devel
+ENV JAVA_HOME /etc/alternatives/jre
+
+# install GIT and SUBVERSION
+
+RUN rpm --import http://opensource.wandisco.com/RPM-GPG-KEY-WANdisco
+RUN yum install -y git
+
 # switch to jenkins user
 
 USER jenkins
